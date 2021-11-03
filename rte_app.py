@@ -87,12 +87,20 @@ def build_dataframe(body):
 
 # here we loop every 5 minutes to reload the data (rte change its data every hours, 15 minutes just in case
 # the user is between the end and the beginning of the new hour
+    
+# choose "paysage" format for the single web page
+st.set_page_config(layout="wide")
+st.header("Dashbord of RTE Production")  
 while True:     
     
-    # choose "paysage" format for the single web page
-    st.set_page_config(layout="wide")  
     
-    # get the data and build a clear dataframe
+    
+    # overwrite charts
+    chart1 = st.empty()
+    chart2 = st.empty()
+    metrique = st.empty()
+    
+    # get data from rte
     body = consume_api()
     intensite_carbone, df = build_dataframe(body)
     average = intensite_carbone.mean()
@@ -107,9 +115,9 @@ while True:
                   labels={"updated_date":"date", "value":"Production"})
     
     # make the charts
-    chart1 = st.write(fig1)
-    chart2 = st.write(fig2)
-    st.metric(label="carbon intensity in Grams/CO2", value=str(last), delta=str(last-average))
+    chart1.write(fig1)
+    chart2.write(fig2)
+    metrique.metric(label="carbon intensity in Grams of CO2 /MWh", value=str(last), delta=str(last-average))
     time.sleep(300)
 
 
