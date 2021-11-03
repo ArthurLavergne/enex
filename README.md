@@ -21,6 +21,7 @@ Comme nous souhaitons réaliser un projet type dashbord, j'ai choisit le framewo
 pip install -r requirements.txt
 streamlit run rte_app.py
 ```
+ouvrir la page : http://localhost:8501
 
 ## Problèmes à corriger / Améliorations
 * Le passage du mois d'Octobre au mois de Novembre a clairement généré une erreur dans les dates
